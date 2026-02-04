@@ -33,7 +33,8 @@ const tlsOptions = {
 let ijPostPath = null; // discovered via IntelliJ SSE: /message?sessionId=...
 let cachedTools = null;
 
-const pendingById = new Map(); // id -> { resolve, reject, timeout, method }
+// Store pending requests by stringified id to tolerate number/string mismatches.
+const pendingById = new Map(); // idKey -> { resolve, reject, timeout, method }
 let nextIjId = 1000; // Start above common ids
 
 // ================= HELPERS =================
@@ -125,15 +126,39 @@ function waitForIntelliJEndpoint() {
 }
 
 function resolvePendingFromJsonRpcObject(obj) {
-  if (!obj || obj.id === undefined) return;
-  if (obj.result === undefined && obj.error === undefined) return;
+  if (!obj) return;
 
-  const pending = pendingById.get(obj.id);
-  if (!pending) return;
+  // Only treat as response if it has result or error
+  const hasResultOrError = obj.result !== undefined || obj.error !== undefined;
+  if (!hasResultOrError) return;
 
-  clearTimeout(pending.timeout);
-  pendingById.delete(obj.id);
-  pending.resolve(obj);
+  // Prefer id match
+  if (obj.id !== undefined) {
+    const idKey = String(obj.id);
+    const pending = pendingById.get(idKey);
+    if (pending) {
+      clearTimeout(pending.timeout);
+      pendingById.delete(idKey);
+      pending.resolve(obj);
+      return;
+    }
+  }
+
+  // Tolerate IntelliJ sending mismatched ids: if exactly one pending request exists, resolve it.
+  if (pendingById.size === 1) {
+    const onlyEntry = pendingById.entries().next().value;
+    if (onlyEntry) {
+      const key = onlyEntry[0];
+      const pending = onlyEntry[1];
+      console.warn("[IJ] Response id did not match pending id; resolving the only pending request", {
+        pendingId: key,
+        responseId: obj.id
+      });
+      clearTimeout(pending.timeout);
+      pendingById.delete(key);
+      pending.resolve(obj);
+    }
+  }
 }
 
 // ================= INTELLIJ SSE (RECEIVE RESPONSES) =================
@@ -175,9 +200,8 @@ function openIntelliJSseSession() {
           } else {
             console.warn("[IJ] Endpoint event but could not parse data:", dataText);
           }
-        }
-
-        if (eventName === "message") {
+        } else {
+          // Treat ANY non-endpoint event as potential JSON-RPC payload.
           const trimmed = (dataText || "").trim();
           if (trimmed) {
             try {
@@ -283,14 +307,15 @@ function callIntelliJAndWait(method, params) {
     }
 
     const id = createIjRequestId();
+    const idKey = String(id);
     const requestObj = { jsonrpc: "2.0", id, method, params };
 
     const timeout = setTimeout(() => {
-      pendingById.delete(id);
+      pendingById.delete(idKey);
       reject(new Error(`IntelliJ did not answer ${method} (id=${id}) within ${WAIT_IJ_RESPONSE_MS}ms`));
     }, WAIT_IJ_RESPONSE_MS);
 
-    pendingById.set(id, { resolve, reject, timeout, method });
+    pendingById.set(idKey, { resolve, reject, timeout, method });
 
     // IntelliJ often returns 202 + "Accepted"; ignore HTTP body.
     try {
@@ -299,7 +324,7 @@ function callIntelliJAndWait(method, params) {
       console.log("[IJ] POST", method, "id=", id, "HTTP", httpResp.statusCode, bodyPreview ? JSON.stringify(bodyPreview) : "");
     } catch (err) {
       clearTimeout(timeout);
-      pendingById.delete(id);
+      pendingById.delete(idKey);
       reject(err);
     }
   });
@@ -382,7 +407,7 @@ https
         sendJsonRpcResult(res, msg.id, {
           protocolVersion: MCP_VERSION_CHATGPT,
           capabilities: { tools: {}, resources: {}, prompts: {} },
-          serverInfo: { name: "chatgpt-intellij-mcp-proxy", version: "1.0.1" }
+          serverInfo: { name: "chatgpt-intellij-mcp-proxy", version: "1.0.2" }
         });
         return;
       }
@@ -397,11 +422,12 @@ https
         return;
       }
 
-      // tools/call: delegate to IntelliJ and wait for SSE response
+      // tools/call: delegate to IntelliJ and WAIT for SSE response; map response id back to ChatGPT id.
       if (msg.method === "tools/call") {
+        const chatgptId = msg.id;
         try {
           if (!cachedTools) {
-            sendJsonRpcError(res, msg.id, -32000, "Tools cache not ready yet");
+            sendJsonRpcError(res, chatgptId, -32000, "Tools cache not ready yet");
             return;
           }
 
@@ -414,10 +440,23 @@ https
             input: args
           });
 
-          // Return IntelliJ JSON-RPC response as-is to ChatGPT
-          sendJson(res, 200, ijResp);
+          // IMPORTANT: ChatGPT waits for its own id, not the IntelliJ id.
+          if (ijResp && (ijResp.result !== undefined || ijResp.error !== undefined)) {
+            const mapped = {
+              jsonrpc: "2.0",
+              id: chatgptId
+            };
+            if (ijResp.error !== undefined) {
+              mapped.error = ijResp.error;
+            } else {
+              mapped.result = ijResp.result;
+            }
+            sendJson(res, 200, mapped);
+          } else {
+            sendJsonRpcError(res, chatgptId, -32000, "IntelliJ returned an unexpected response");
+          }
         } catch (err) {
-          sendJsonRpcError(res, msg.id, -32000, err.message);
+          sendJsonRpcError(res, chatgptId, -32000, err.message);
         }
         return;
       }
