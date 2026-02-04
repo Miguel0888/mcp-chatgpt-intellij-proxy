@@ -1,1 +1,313 @@
-aW1wb3J0IGh0dHBzIGZyb20gImh0dHBzIjsKaW1wb3J0IGh0dHAgZnJvbSAiaHR0cCI7CmltcG9ydCBmcyBmcm9tICJmcyI7CmltcG9ydCBwYXRoIGZyb20gInBhdGgiOwoKLy8gPT09PT09PT09PT09PT09PT09PT09IENPTkZJRyA9PT09PT09PT09PT09PT09PT09PT09CmNvbnN0IFBPUlQgPSBOdW1iZXIocHJvY2Vzcy5lbnYuUE9SVCB8fCA4MDgxKTsKY29uc3QgTUNQX1ZFUlNJT05fQ0hBVEdQVFQgPSAiMjAyNS0wMy0yNiI7CgovLyBJbnRlbGxpSiBNQ1AgKGxvY2FsKQpjb25zdCBJSl9IT1NUID0gcHJvY2Vzcy5lbnYuSUpfSE9TVCB8fCAiMTI3LjAuMC4xIjsKY29uc3QgSUpfUE9SVCA9IE51bWJlcihwcm9jZXNzLmVudi5JSl9QT1JUIHx8IDY0MzQzKTsKY29uc3QgSUpfU1NFX1BBVEggPSBwcm9jZXNzLmVudi5JSl9TU0VfUEFUSCB8fCAiL3NzZSI7CgovLyBUaW1lb3V0cwpjb25zdCBXQUlUX0VORFBPSU5UX01TID0gTnVtYmVyKHByb2Nlc3MuZW52LldBSVRfRU5EUE9JTlRfTVMgfHwgMzAwMCk7CmNvbnN0IFdBSVRfSUpfUkVTUE9OU0VfTVMgPSBOdW1iZXIocHJvY2Vzcy5lbnYuV0FJVF9JSl9SRVNQT05TRV9NUyB8fCA2MDAwMCk7CgovLyBMb2dnaW5nCmNvbnN0IERFQlVHX1NTRSA9IFN0cmluZyhwcm9jZXNzLmVudi5ERUJVR19TU0UgfHwgIiIpLnRvTG93ZXJDYXNlKCkgPT09ICJ0cnVlIjsKCi8vID09PT09PT09PT09PT09PT09PT09IFRMUyA9PT09PT09PT09PT09PT09PT09PT09CmNvbnN0IGNlcnRGb2xkZXIgPSBwYXRoLnJlc29sdmUoIi4vY2VydHMiKTsKY29uc3QgdGxzT3B0aW9ucyA9IHsKICBrZXk6IGZzLnJlYWRGaWxlU3luYyhwYXRoLmpvaW4oY2VydEZvbGRlciwgImN1cnJlbnQtY2FyLmNvbS1rZXkucGVtIikpLAogIGNlcnQ6IGZzLnJlYWRGaWxlU3luYyhwYXRoLmpvaW4oY2VydEZvbGRlciwgImN1cnJlbnQtY2FyLmNvbS1mdWxsY2hhaW4ucGVtIikpCn07CgovLyA9PT09PT09PT09PT09PT09PT09PT09IFNUQVRFID09PT09PT09PT09PT09PT09PT09PT09CmxldCBpalBvc3RQYXRoID0gbnVsbDsKbGV0IGNhY2hlZFRvb2xzID0gbnVsbDsKbGV0IHRvb2xzV2FybXVwUHJvbWlzZSA9IG51bGw7CgovLyBFeGFjdGx5IG9uZSBwZW5kaW5nIGNhbGwgYXQgYSB0aW1lCmxldCBwZW5kaW5nQ2FsbCA9IG51bGw7CgovLyA9PT09PT09PT09PT09PT09PT09PT09IEhFTFBFUlMgPT09PT09PT09PT09PT09PT09PT09CmxldCBjb3VudGVyID0gMDsKZnVuY3Rpb24gcmVhZEJvZHkocmVxKSB7CiAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXNvbHZlLCByZWplY3QpID0+IHsKICAgIGxldCBib2R5ID0gIiI7CiAgICByZXEub24oImRhdGEiLCAoYykgPT4gKGJvZHkgKz0gYy50b1N0cmluZygpKSk7CiAgICByZXEub24oImVuZCIsICgpID0+IHJlc29sdmUoYm9keSkpOwogICAgcmVxLm9uKCJlcnJvciIsIHJlamVjdCk7CiAgfSk7Cn0KCi8vIFNlbmQgSlNPTiBoZWxwZXJzCmZ1bmN0aW9uIHNlbmRKc29uKHJlcywgc3RhdHVzQ29kZSwgb2JqKSB7CiAgcmVzLndyaXRlSGVhZChzdGF0dXNDb2RlLCB7ICJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiIgfSk7CiAgcmVzLmVuZChKU09OLnN0cmluZ2lmeShvYmopKTsKfQoKZnVuY3Rpb24gc2VuZEpzb25ScGNSZXN1bHQocmVzLCBpZCwgcmVzdWx0KSB7CiAgc2VuZEpzb24ocmVzLCAyMDAsIHsganNvbnJwYzogIjIuMCIsIGlkLCByZXN1bHQgfSk7Cn0KCmZ1bmN0aW9uIHNlbmRKc29uUnBjRXJyb3IocmVzLCBpZCwgY29kZSwgbWVzc2FnZSkgewogIHNlbmRKc29uKHJlcywgMjAwLCB7IGpzb25ycGM6ICIyLjAiLCBpZCwgZXJyb3I6IHsgY29kZSwgbWVzc2FnZSB9IH0pOwp9CgpmdW5jdGlvbiBpc05vdGlmaWNhdGlvbihtc2cpIHsKICByZXR1cm4gbXNnICYmIG1zZy5pZCA9PT0gdW5kZWZpbmVkOwp9CgpmdW5jdGlvbiBub3JtYWxpemVFbmRwb2ludFRvUGF0aChlbmRwb2ludCkgewogIGNvbnN0IHMgPSAoZW5kcG9pbnQgfHwgIiIpLnRyaW0oKTsKICBpZiAoIXMpIHJldHVybiBudWxsOwoKICBpZiAocy5zdGFydHNXaXRoKCJodHRwIikpIHsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHUgPSBuZXcgVVJMKHMpOwogICAgICByZXR1cm4gdS5wYXRobmFtZSArICh1LnNlYXJjaCB8fCAiIik7CiAgICB9IGNhdGNoIHsKICAgICAgcmV0dXJuIG51bGw7CiAgICB9CiAgfQogIHJldHVybiBzLnN0YXJ0c1dpdGgoIi8iKSA/IHMgOiAiLyIgKyBzOwp9CgpmdW5jdGlvbiB3YWl0Rm9ySW50ZWxsaUpFbmRwb2ludCgpIHsKICByZXR1cm4gbmV3IFByb21pc2UoKHJlc29sdmUsIHJlamVjdCkgPT4gewogICAgY29uc3Qgc3RhcnQgPSBEYXRlLm5vdygpOwogICAgY29uc3QgdCA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgaWYgKGlqUG9zdFBhdGgpIHsKICAgICAgICBjbGVhckludGVydmFsKHQpOwogICAgICAgIHJlc29sdmUoaWpQb3N0UGF0aCk7CiAgICAgIH0KICAgICAgaWYgKERhdGUubm93KCkgLSBzdGFydCA+IFdBSVRfRU5EUE9JTlRfTVMpIHsKICAgICAgICBjbGVhckludGVydmFsKHQpOwogICAgICAgIHJlamVjdChuZXcgRXJyb3IoIkludGVsbGlKIGRpZCBub3QgcHVibGlzaCBQT1NUIGVuZHBvaW50IikpOwogICAgICB9CiAgICB9LCA1MCk7CiAgfSk7Cn0KCmZ1bmN0aW9uIGV4dHJhY3RUb29sQ2FsbChtc2cpIHsKICBjb25zdCBwYXJhbXMgPSBtc2cucGFyYW1zIHx8IHt9OwogIHJldHVybiB7CiAgICBuYW1lOiBwYXJhbXMubmFtZSwKICAgIGFyZ3M6CiAgICAgIHBhcmFtcy5hcmd1bWVudHMgIT09IHVuZGVmaW5lZAogICAgICAgID8gcGFyYW1zLmFyZ3VtZW50cwogICAgICAgIDogcGFyYW1zLmlucHV0ICE9PSB1bmRlZmluZWQKICAgICAgID8gcGFyYW1zLmlucHV0CiAgICAgICA6IHt9CiAgfTsKfQoKLy8gPT09PT09PT09PT09PT09PT09PT09IElOVEVMTElKIFNTRSA9PT09PT09PT09PT09PT09PT09PT09CmZ1bmN0aW9uIGhhbmRsZUludGVsbGlKU3NlUGF5bG9hZChkYXRhVGV4dCwgZXZlbnROYW1lKSB7CiAgY29uc3QgdGV4dCA9IChkYXRhVGV4dCB8fCAiIikudHJpbSgpOwogIGlmICghdGV4dCkgcmV0dXJuOwoKICBpZiAoREVCVUdfU1NFKSB7CiAgICBjb25zb2xlLmxvZygiW0lKXVtTU0VdIiwgZXZlbnROYW1lIHx8ICJtZXNzYWdlIiwgdGV4dCk7CiAgfQoKICBpZiAoKGV2ZW50TmFtZSB8fCAibWVzc2FnZSIpID09PSAiZW5kcG9pbnQiKSB7CiAgICBpalBvc3RQYXRoID0gbm9ybWFsaXplRW5kcG9pbnRUb1BhdGgodGV4dCk7CiAgICBjb25zb2xlLmxvZygiW0lKXSPOSTQgZW5kcG9pbnQ6IiwgaWpQb3N0UGF0aCk7CiAgICByZXR1cm47CiAgfQoKICBsZXQgcGFyc2VkOwogIHRyeSB7CiAgICBwYXJzZWQgPSBKU09OLnBhcnNlKHRleHQpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuOwogIH0KCiAgY29uc3QgbXNncyA9IEFycmF5LmlzQXJyYXkocGFyc2VkKSA/IHBhcnNlZCA6IFtwYXJzZWRdOwogIGZvciAoY29uc3QgbXNnIG9mIG1zZ3MpIHsKICAgIGlmICghcGVuZGluZ0NhbGwpIGNvbnRpbnVlOwogICAgaWYgKG1zZy5yZXN1bHQgIT09IHVuZGVmaW5lZCB8fCBtc2cuZXJyb3IgIT09IHVuZGVmaW5lZCkgewogICAgICBjbGVhclRpbWVvdXQocGVuZGluZ0NhbGwudGltZW91dCk7CiAgICAgIGNvbnN0IHJlc29sdmUgPSBwZW5kaW5nQ2FsbC5yZXNvbHZlOwogICAgICBwZW5kaW5nQ2FsbCA9IG51bGw7CiAgICAgIHJlc29sdmUobXNnKTsKICAgICAgcmV0dXJuOwogICAgfQogIH0KfQoKZnVuY3Rpb24gb3BlbkludGVsbGlKU3NlU2Vzc2lvbigpIHsKICBjb25zdCByZXEgPSBodHRwLnJlcXVlc3QoCiAgICB7CiAgICAgIGhvc3Q6IElKX0hPU1QsCiAgICAgIHBvcnQ6IElKX1BPUlQsCiAgICAgIHBhdGg6IElKX1NTRV9QQVRILAogICAgICBtZXRob2Q6ICJHRVQiLAogICAgICBoZWFkZXJzOiB7IEFjY2VwdDogInRleHQvZXZlbnQtc3RyZWFtIiB9CiAgICB9LAogICAgKHJlcykgPT4gewogICAgICBsZXQgYnVmZmVyID0gIiI7CiAgICAgIGxldCBldmVudCA9IG51bGw7CiAgICAgIGxldCBsaW5lcyA9IFtdOwoKICAgICAgY29uc3QgZmx1c2ggPSAoKSA9PiB7CiAgICAgICAgaGFuZGxlSW50ZWxsaUpTc2VQYXlsb2FkKGxpbmVzLmpvaW4oIlxuIiksIGV2ZW50KTsKICAgICAgICBldmVudCA9IG51bGw7CiAgICAgICAgbGluZXMgPSBbXTsKICAgICAgfTsKCiAgICAgIHJlcy5vbigiZGF0YSIsIChjaHVuaykgPT4gewogICAgICAgIGJ1ZmZlciArPSBjaHVuay50b1N0cmluZygpOwogICAgICAgIHdoaWxlICh0cnVlKSB7CiAgICAgICAgICBjb25zdCBpID0gYnVmZmVyLmluZGV4T2YoIlxuIik7CiAgICAgICAgICBpZiAoaSA8IDApIGJyZWFrOwogICAgICAgICAgY29uc3QgbGluZSA9IGJ1ZmZlci5zbGljZSgwLCBpKS5yZXBsYWNlKC9ccisvLCAiIik7CiAgICAgICAgICBidWZmZXIgPSBidWZmZXIuc2xpY2UoaSArIDEpOwoKICAgICAgICAgIGlmICghbGluZSkgewogICAgICAgICAgICBmbHVzaCgpOwogICAgICAgICAgfSBlbHNlIGlmIChsaW5lLnN0YXJ0c1dpdGgoImV2ZW50OiIpKSB7CiAgICAgICAgICAgIGV2ZW50ID0gbGluZS5zbGljZSg2KS50cmltKCk7CiAgICAgICAgICB9IGVsc2UgaWYgKGxpbmUuc3RhcnRzV2l0aCgiZGF0YToiKSkgewogICAgICAgICAgICBsaW5lcy5wdXNoKGxpbmUuc2xpY2UoNSkudHJpbSgpKTsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0pOwogICAgfQogICk7CgogIHJlcS5lbmQoKTsKfQoKLy8gPT09PT09PT09PT09PT09PT09PT09IElOVEVMTElKIFBPU1QgPT09PT09PT09PT09PT09PT09PT09CmZ1bmN0aW9uIHBvc3RUb0ludGVsbGlKXChwYXRoLCBwYXlsb2FkKSB7CiAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXNvbHZlLCByZWplY3QpID0+IHsKICAgIGNvbnN0IHJlcSA9IGh0dHAucmVxdWVzdCgKICAgICAgewogICAgICAgIGhvc3Q6IElKX0hPU1QsCiAgICAgICAgcG9ydDogSUpfUE9SVCwKICAgICAgICBwYXRoLAogICAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICAgIGhlYWRlcnM6IHsKICAgICAgICAgICJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiIsCiAgICAgICAgICAiQ29udGVudC1MZW5ndGgiOiBCdWZmZXIuYnl0ZUxlbmd0aChwYXlsb2FkKQogICAgICAgIH0KICAgICAgfSwKICAgICAgKHJlcykgPT4gewogICAgICAgIGxldCBkYXRhID0gIiI7CiAgICAgICAgcmVzLm9uKCJkYXRhIiwgKGMpID0+IChkYXRhICs9IGMudG9TdHJpbmcoKSkpOwogICAgICAgIHJlcy5vbigiZW5kIiwgKCkgPT4gcmVzb2x2ZSh7IHN0YXR1czogcmVzLnN0YXR1c0NvZGUsIGJvZHk6IGRhdGEgfSkpOwogICAgICB9CiAgICApOwogICAgcmVxLm9uKCJlcnJvciIsIHJlamVjdCk7CiAgICByZXEud3JpdGUocGF5bG9hZCk7CiAgICByZXEuZW5kKCk7CiAgfSk7Cn0KCmFzeW5jIGZ1bmN0aW9uIGNhbGxJbnRlbGxpSihtZXRob2QsIHBhcmFtcykgewogIGNvbnN0IGVuZHBvaW50ID0gYXdhaXQgd2FpdEZvckludGVsbGlKRW5kcG9pbnQoKTsKICBpZiAocGVuZGluZ0NhbGwpIHRocm93IG5ldyBFcnJvcigiQ29uY3VycmVudCBJbnRlbGxpSiBjYWxsIik7CgogIHJldHVybiBuZXcgUHJvbWlzZShhc3luYyAocmVzb2x2ZSwgcmVqZWN0KSA9PiB7CiAgICBjb25zdCB0aW1lb3V0ID0gc2V0VGltZW91dCgoKSA9PiB7CiAgICAgIHBlbmRpbmdDYWxsID0gbnVsbDsKICAgICAgcmVqZWN0KG5ldyBFcnJvcigiSW50ZWxsaUogdGltZW91dCIpKTsKICAgIH0sIFdBSVRfSUpfUkVTUE9OU0VfTVMpOwoKICAgIHBlbmRpbmdDYWxsID0geyByZXNvbHZlLCByZWplY3QsIHRpbWVvdXQgfTsKCiAgICBhd2FpdCBwb3N0VG9JbnRlbGxpSihlbmRwb2ludCwgSlNPTi5zdHJpbmdpZnkoewogICAgICBqc29ucnBjOiAiMi4wIiwKICAgICAgaWQ6IERhdGUubm93KCksCiAgICAgIG1ldGhvZCwKICAgICAgcGFyYW1zCiAgICB9KSk7CiAgfSk7Cn0KCi8vIPCflKIgRklYOiBJbnRlbGxpSiBzdXBwb3J0cyBPTkxZIGRvb3RzL2NhbGwKYXN5bmMgZnVuY3Rpb24gY2FsbEludGVsbGlKVG9vbChuYW1lLCBhcmdzKSB7CiAgcmV0dXJuIGNhbGxJbnRlbGxpSigiZG9vdHMvY2FsbCIsIHsKICAgIG5hbWUsCiAgICBhcmd1bWVudHM6IGFyZ3MKICB9KTsKfQoKLy8gPT09PT09PT09PT09PT09PT09PT09IFdBUk1VUCA9PT09PT09PT09PT09PT09PT09PT09CmFzeW5jIGZ1bmN0aW9uIHdhcm1VcFRvb2xzQ2FjaGVPbmNlKCkgewogIGlmIChjYWNoZWRUb29scykgcmV0dXJuIGNhY2hlZFRvb2xzOwogIGlmICh0b29sc1dhcm11cFByb21pc2UpIHJldHVybiB0b29sc1dhcm11cFByb21pc2U7CgogIHRvb2xzV2FybXVwUHJvbWlzZSA9IChhc3luYyAoKSA9PiB7CiAgICBhd2FpdCB3YWl0Rm9ySW50ZWxsaUpFbmRwb2ludCgpOwoKICAgIGF3YWl0IGNhbGxJbnRlbGxpSigiY2FsbF90b29sIiwgewogICAgICBwcm90b2NvbFZlcnNpb246ICIxLjAiLAogICAgICBjYXBhYmlsaXRpZXM6IHsgc3NlOiB0cnVlIH0sCiAgICAgIGNsaWVudEluZm86IHsgbmFtZTogInByb3h5IiwgdmVyc2lvbjogIjEuMCIgfQogICAgfSk7CgogICAgY29uc3QgcmVzcCA9IGF3YWl0IGNhbGxJbnRlbGxpSigidG9vbHMvbGlzdCIsIHt9KTsKICAgIGNhY2hlZFRvb2xzID0gcmVzcC5yZXN1bHQudG9vbHMgfHwgW107CiAgICBjb25zb2xlLmxvZygiW0JPT1RdIFRvb2xzOiIsIGNhY2hlZFRvb2xzLmxlbmd0aCk7CiAgICByZXR1cm4gY2FjaGVkVG9vbHM7CiAgfSkoKTsKCiAgcmV0dXJuIHRvb2xzV2FybXVwUHJvbWlzZTsKfQoKLy8gPT09PT09PT09PT09PT09PT09PT09IFNFUlZFUiA9PT09PT09PT09PT09PT09PT09PT09Cmh0dHBzCiAgLmNyZWF0ZVNlcnZlcih0bHNPcHRpb25zLCBhc3luYyAocmVxLCByZXMpID0+IHsKICAgIGlmIChyZXEubWV0aG9kID09PSAiR0VUIiAmJiByZXEudXJsID09PSAiL3NzZSIpIHsKICAgICAgcmVzLndyaXRlSGVhZCgyMDAsIHsKICAgICAgICAiQ29udGVudC1UeXBlIjogInRleHQvZXZlbnQtc3RyZWFtIiwKICAgICAgICAiQ2FjaGUtQ29udHJvbCI6ICJuby1jYWNoZSIsCiAgICAgICAgQ29ubmVjdGlvbjogImtlZXAtYWxpdmUiCiAgICAgIH0pOwogICAgICByZXMud3JpdGUoImV2ZW50OiBlbmRwb2ludFxuIik7CiAgICAgIHJlcy53cml0ZSgiZGF0YTogL3NzZVxuXG4iKTsKICAgICAgcmV0dXJuOwogICAgfQoKICAgIGlmIChyZXEubWV0aG9kICE9PSAiUE9TVCIgfHwgcmVxLnVybCAhPT0gIi9zc2UiKSB7CiAgICAgIHJlcy53cml0ZUhlYWQoNDA0KTsKICAgICAgcmV0dXJuIHJlcy5lbmQoKTsKICAgIH0KCiAgICBjb25zdCBtc2cgPSBKU09OLnBhcnNlKGF3YWl0IHJlYWRCb2R5KHJlcSkpOwogICAgY29uc29sZS5sb2coIlJQQyIsIG1zZy5tZXRob2QpOwoKICAgIGlmIChtc2cubWV0aG9kID09PSAiaW5pdGlhbGl6ZSIpIHsKICAgICAgcmV0dXJuIHNlbmRKc29uUnBjUmVzdWx0KHJlcywgbXNnLmlkLCB7CiAgICAgICAgcHJvdG9jb2xWZXJzaW9uOiBNQ1BfVkVSU0lPTl9DSEFUR1BULAogICAgICAgIGNhcGFiaWxpdGllczogeyB0b29sczoge30gfSwKICAgICAgICBzZXJ2ZXJJbmZvOiB7IG5hbWU6ICJtY3AtcHJveHkiLCB2ZXJzaW9uOiAiZml4ZWQiIH0KICAgICAgfSk7CiAgICB9CgogICAgaWYgKG1zZy5tZXRob2QgPT09ICJ0b29scy9saXN0IikgewogICAgICBhd2FpdCB3YXJtVXBUb29sc0NhY2hlT25jZSgpOwogICAgICByZXR1cm4gc2VuZEpzb25ScGNSZXN1bHQocmVzLCBtc2cuaWQsIHsgdG9vbHM6IGNhY2hlZFRvb2xzIH0pOwogICAgfQoKICAgIGlmIChtc2cubWV0aG9kID09PSAidG9vbHMvY2FsbCIgfHwgbXNnLm1ldGhvZCA9PT0gImNhbGxfdG9vbCIpIHsKICAgICAgY29uc3QgeyBuYW1lLCBhcmdzIH0gPSBleHRyYWN0VG9vbENhbGwobXNnKTsKICAgICAgY29uc3QgaWpSZXNwID0gYXdhaXQgY2FsbEludGVsbGlKVG9vbChuYW1lLCBhcmdzKTsKICAgICAgcmV0dXJuIHNlbmRKc29uUnBjUmVzdWx0KHJlcywgbXNnLmlkLCBpalJlc3AucmVzdWx0KTsKICAgIH0KCiAgICBzZW5kSnNvblJwY0Vycm9yKHJlcywgbXNnLmlkLCAtMzI2MDEsICJNZXRob2Qgbm90IHN1cHBvcnRlZCIpOwogIH0pCiAgLmxpc3RlbigKICAgIFBPUlQsCiAgICAoKSA9PiB7CiAgICAgIGNvbnNvbGUubG9nKGBNQ1AgcHJveHkgbGlzdGVuaW5nIG9uIGh0dHBzOi8vbG9jYWxob3N0OiR7UE9SVH0vc3NlYCk7CiAgICAgIG9wZW5JbnRlbGxpSlNzZVNlc3Npb24oKTsKICAgIH0KICApOw==
+import https from "https";
+import http from "http";
+import fs from "fs";
+import path from "path";
+
+// ================= CONFIG =================
+const PORT = Number(process.env.PORT || 8081);
+const MCP_VERSION_CHATGPT = "2025-03-26";
+
+// IntelliJ MCP (local)
+const IJ_HOST = process.env.IJ_HOST || "127.0.0.1";
+const IJ_PORT = Number(process.env.IJ_PORT || 64343);
+const IJ_SSE_PATH = process.env.IJ_SSE_PATH || "/sse";
+
+// Timeouts
+const WAIT_ENDPOINT_MS = Number(process.env.WAIT_ENDPOINT_MS || 3000);
+const WAIT_IJ_RESPONSE_MS = Number(process.env.WAIT_IJ_RESPONSE_MS || 60000);
+
+// Logging
+const DEBUG_SSE = String(process.env.DEBUG_SSE || "").toLowerCase() === "true";
+
+// ================= TLS =================
+const certFolder = path.resolve("./certs");
+const tlsOptions = {
+  key: fs.readFileSync(path.join(certFolder, "current-car.com-key.pem")),
+  cert: fs.readFileSync(path.join(certFolder, "current-car.com-fullchain.pem"))
+};
+
+// ================= STATE =================
+let ijPostPath = null;
+let cachedTools = null;
+let toolsWarmupPromise = null;
+
+// Exactly one pending call at a time
+let pendingCall = null;
+
+// ================= HELPERS =================
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    let body = "";
+    req.on("data", (c) => (body += c.toString()));
+    req.on("end", () => resolve(body));
+    req.on("error", reject);
+  });
+}
+
+function sendJson(res, statusCode, obj) {
+  res.writeHead(statusCode, { "Content-Type": "application/json" });
+  res.end(JSON.stringify(obj));
+}
+
+function sendJsonRpcResult(res, id, result) {
+  sendJson(res, 200, { jsonrpc: "2.0", id, result });
+}
+
+function sendJsonRpcError(res, id, code, message) {
+  sendJson(res, 200, { jsonrpc: "2.0", id, error: { code, message } });
+}
+
+function isNotification(msg) {
+  return msg && msg.id === undefined;
+}
+
+function normalizeEndpointToPath(endpoint) {
+  const s = (endpoint || "").trim();
+  if (!s) return null;
+
+  if (s.startsWith("http")) {
+    try {
+      const u = new URL(s);
+      return u.pathname + (u.search || "");
+    } catch {
+      return null;
+    }
+  }
+  return s.startsWith("/") ? s : "/" + s;
+}
+
+function waitForIntelliJEndpoint() {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const t = setInterval(() => {
+      if (ijPostPath) {
+        clearInterval(t);
+        resolve(ijPostPath);
+      }
+      if (Date.now() - start > WAIT_ENDPOINT_MS) {
+        clearInterval(t);
+        reject(new Error("IntelliJ did not publish POST endpoint"));
+      }
+    }, 50);
+  });
+}
+
+function extractToolCall(msg) {
+  const params = msg.params || {};
+  return {
+    name: params.name,
+    args:
+      params.arguments !== undefined
+        ? params.arguments
+        : params.input !== undefined
+        ? params.input
+        : {}
+  };
+}
+
+// ================= INTELLIJ SSE =================
+function handleIntelliJSsePayload(dataText, eventName) {
+  const text = (dataText || "").trim();
+  if (!text) return;
+
+  if (DEBUG_SSE) {
+    console.log("[IJ][SSE]", eventName || "message", text);
+  }
+
+  if ((eventName || "message") === "endpoint") {
+    ijPostPath = normalizeEndpointToPath(text);
+    console.log("[IJ] POST endpoint:", ijPostPath);
+    return;
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    return;
+  }
+
+  const msgs = Array.isArray(parsed) ? parsed : [parsed];
+  for (const msg of msgs) {
+    if (!pendingCall) continue;
+    if (msg.result !== undefined || msg.error !== undefined) {
+      clearTimeout(pendingCall.timeout);
+      const resolve = pendingCall.resolve;
+      pendingCall = null;
+      resolve(msg);
+      return;
+    }
+  }
+}
+
+function openIntelliJSseSession() {
+  const req = http.request(
+    {
+      host: IJ_HOST,
+      port: IJ_PORT,
+      path: IJ_SSE_PATH,
+      method: "GET",
+      headers: { Accept: "text/event-stream" }
+    },
+    (res) => {
+      let buffer = "";
+      let event = null;
+      let lines = [];
+
+      const flush = () => {
+        handleIntelliJSsePayload(lines.join("\n"), event);
+        event = null;
+        lines = [];
+      };
+
+      res.on("data", (chunk) => {
+        buffer += chunk.toString();
+        while (true) {
+          const i = buffer.indexOf("\n");
+          if (i < 0) break;
+          const line = buffer.slice(0, i).replace(/\r$/, "");
+          buffer = buffer.slice(i + 1);
+
+          if (!line) {
+            flush();
+          } else if (line.startsWith("event:")) {
+            event = line.slice(6).trim();
+          } else if (line.startsWith("data:")) {
+            lines.push(line.slice(5).trim());
+          }
+        }
+      });
+    }
+  );
+
+  req.end();
+}
+
+// ================= INTELLIJ POST =================
+function postToIntelliJ(path, payload) {
+  return new Promise((resolve, reject) => {
+    const req = http.request(
+      {
+        host: IJ_HOST,
+        port: IJ_PORT,
+        path,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(payload)
+        }
+      },
+      (res) => {
+        let data = "";
+        res.on("data", (c) => (data += c.toString()));
+        res.on("end", () => resolve({ status: res.statusCode, body: data }));
+      }
+    );
+    req.on("error", reject);
+    req.write(payload);
+    req.end();
+  });
+}
+
+async function callIntelliJ(method, params) {
+  const endpoint = await waitForIntelliJEndpoint();
+  if (pendingCall) throw new Error("Concurrent IntelliJ call");
+
+  return new Promise(async (resolve, reject) => {
+    const timeout = setTimeout(() => {
+      pendingCall = null;
+      reject(new Error("IntelliJ timeout"));
+    }, WAIT_IJ_RESPONSE_MS);
+
+    pendingCall = { resolve, reject, timeout };
+
+    await postToIntelliJ(
+      endpoint,
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: Date.now(),
+        method,
+        params
+      })
+    );
+  });
+}
+
+// 🔥 FIX: IntelliJ supports ONLY tools/call
+async function callIntelliJTool(name, args) {
+  return callIntelliJ("tools/call", {
+    name,
+    arguments: args
+  });
+}
+
+// ================= WARMUP =================
+async function warmUpToolsCacheOnce() {
+  if (cachedTools) return cachedTools;
+  if (toolsWarmupPromise) return toolsWarmupPromise;
+
+  toolsWarmupPromise = (async () => {
+    await waitForIntelliJEndpoint();
+
+    await callIntelliJ("initialize", {
+      protocolVersion: "1.0",
+      capabilities: { sse: true },
+      clientInfo: { name: "proxy", version: "1.0" }
+    });
+
+    const resp = await callIntelliJ("tools/list", {});
+    cachedTools = resp.result.tools || [];
+    console.log("[BOOT] Tools:", cachedTools.length);
+    return cachedTools;
+  })();
+
+  return toolsWarmupPromise;
+}
+
+// ================= SERVER =================
+https
+  .createServer(tlsOptions, async (req, res) => {
+    if (req.method === "GET" && req.url === "/sse") {
+      res.writeHead(200, {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive"
+      });
+      res.write(`event: endpoint\n`);
+      res.write(`data: /sse\n\n`);
+      return;
+    }
+
+    if (req.method !== "POST" || req.url !== "/sse") {
+      res.writeHead(404);
+      return res.end();
+    }
+
+    const msg = JSON.parse(await readBody(req));
+    console.log("RPC", msg.method);
+
+    if (msg.method === "initialize") {
+      return sendJsonRpcResult(res, msg.id, {
+        protocolVersion: MCP_VERSION_CHATGPT,
+        capabilities: { tools: {} },
+        serverInfo: { name: "mcp-proxy", version: "fixed" }
+      });
+    }
+
+    if (msg.method === "tools/list") {
+      await warmUpToolsCacheOnce();
+      return sendJsonRpcResult(res, msg.id, { tools: cachedTools });
+    }
+
+    if (msg.method === "tools/call" || msg.method === "call_tool") {
+      const { name, args } = extractToolCall(msg);
+      const ijResp = await callIntelliJTool(name, args);
+      return sendJsonRpcResult(res, msg.id, ijResp.result);
+    }
+
+    sendJsonRpcError(res, msg.id, -32601, "Method not supported");
+  })
+  .listen(PORT, () => {
+    console.log(`MCP proxy listening on https://localhost:${PORT}/sse`);
+    openIntelliJSseSession();
+  });
