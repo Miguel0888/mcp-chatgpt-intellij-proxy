@@ -1,0 +1,12 @@
+{
+  "name": "mcp-chatgpt-intellij-proxy",
+  "version": "1.0.0",
+  "type": "module",
+  "private": false,
+  "description": "Node.js proxy bridging ChatGPT MCP (Streamable HTTP) and IntelliJ MCP (SSE responses) with cached tools.",
+  "license": "MIT",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js"
+  }
+}
