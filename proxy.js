@@ -4,20 +4,23 @@ import fs from "fs";
 import path from "path";
 
 // ================= CONFIG =================
-const PORT = 8081;
+const PORT = Number(process.env.PORT || 8081);
 
 // ChatGPT MCP (Streamable HTTP)
 const CHATGPT_ENDPOINT_PATH = "/sse";
 const MCP_VERSION_CHATGPT = "2025-03-26";
 
 // IntelliJ MCP (local)
-const IJ_HOST = "127.0.0.1";
-const IJ_PORT = 64343;
-const IJ_SSE_PATH = "/sse";
+const IJ_HOST = process.env.IJ_HOST || "127.0.0.1";
+const IJ_PORT = Number(process.env.IJ_PORT || 64343);
+const IJ_SSE_PATH = process.env.IJ_SSE_PATH || "/sse";
 
 // Timeouts
-const WAIT_ENDPOINT_MS = 3000;
-const WAIT_IJ_RESPONSE_MS = 8000;
+const WAIT_ENDPOINT_MS = Number(process.env.WAIT_ENDPOINT_MS || 3000);
+const WAIT_IJ_RESPONSE_MS = Number(process.env.WAIT_IJ_RESPONSE_MS || 30000);
+
+// Logging
+const DEBUG_SSE = String(process.env.DEBUG_SSE || "").toLowerCase() === "true";
 
 // ================= TLS =================
 const certFolder = path.resolve("./certs");
@@ -30,7 +33,7 @@ const tlsOptions = {
 let ijPostPath = null; // discovered via IntelliJ SSE: /message?sessionId=...
 let cachedTools = null;
 
-const pendingById = new Map(); // id -> { resolve, reject, timeout }
+const pendingById = new Map(); // id -> { resolve, reject, timeout, method }
 let nextIjId = 1000; // Start above common ids
 
 // ================= HELPERS =================
@@ -121,6 +124,18 @@ function waitForIntelliJEndpoint() {
   });
 }
 
+function resolvePendingFromJsonRpcObject(obj) {
+  if (!obj || obj.id === undefined) return;
+  if (obj.result === undefined && obj.error === undefined) return;
+
+  const pending = pendingById.get(obj.id);
+  if (!pending) return;
+
+  clearTimeout(pending.timeout);
+  pendingById.delete(obj.id);
+  pending.resolve(obj);
+}
+
 // ================= INTELLIJ SSE (RECEIVE RESPONSES) =================
 function openIntelliJSseSession() {
   console.log(`[IJ] Opening SSE session http://${IJ_HOST}:${IJ_PORT}${IJ_SSE_PATH}`);
@@ -147,6 +162,11 @@ function openIntelliJSseSession() {
         const eventName = currentEvent || "message";
         const dataText = currentDataLines.join("\n");
 
+        if (DEBUG_SSE) {
+          const preview = dataText.length > 500 ? dataText.substring(0, 500) + "...<truncated>" : dataText;
+          console.log("[IJ][SSE] event=", eventName, "data=", preview);
+        }
+
         if (eventName === "endpoint") {
           const candidate = parseEndpointDataToPath(dataText);
           if (candidate) {
@@ -157,21 +177,19 @@ function openIntelliJSseSession() {
           }
         }
 
-        // IntelliJ responses are typically sent as event: message with JSON payload
         if (eventName === "message") {
           const trimmed = (dataText || "").trim();
           if (trimmed) {
             try {
-              const obj = JSON.parse(trimmed);
+              const parsed = JSON.parse(trimmed);
 
-              // Resolve pending JSON-RPC responses
-              if (obj && obj.id !== undefined && (obj.result !== undefined || obj.error !== undefined)) {
-                const pending = pendingById.get(obj.id);
-                if (pending) {
-                  clearTimeout(pending.timeout);
-                  pendingById.delete(obj.id);
-                  pending.resolve(obj);
+              // IntelliJ might emit a single response or an array of responses.
+              if (Array.isArray(parsed)) {
+                for (let i = 0; i < parsed.length; i++) {
+                  resolvePendingFromJsonRpcObject(parsed[i]);
                 }
+              } else {
+                resolvePendingFromJsonRpcObject(parsed);
               }
             } catch {
               // Ignore non-JSON payload
@@ -269,15 +287,16 @@ function callIntelliJAndWait(method, params) {
 
     const timeout = setTimeout(() => {
       pendingById.delete(id);
-      reject(new Error(`IntelliJ did not answer ${method} within ${WAIT_IJ_RESPONSE_MS}ms`));
+      reject(new Error(`IntelliJ did not answer ${method} (id=${id}) within ${WAIT_IJ_RESPONSE_MS}ms`));
     }, WAIT_IJ_RESPONSE_MS);
 
-    pendingById.set(id, { resolve, reject, timeout });
+    pendingById.set(id, { resolve, reject, timeout, method });
 
     // IntelliJ often returns 202 + "Accepted"; ignore HTTP body.
     try {
       const httpResp = await postToIntelliJ(endpoint, JSON.stringify(requestObj));
-      console.log("[IJ] POST", method, "HTTP", httpResp.statusCode);
+      const bodyPreview = (httpResp.body || "").toString();
+      console.log("[IJ] POST", method, "id=", id, "HTTP", httpResp.statusCode, bodyPreview ? JSON.stringify(bodyPreview) : "");
     } catch (err) {
       clearTimeout(timeout);
       pendingById.delete(id);
@@ -305,7 +324,7 @@ async function warmUpToolsCache() {
     throw new Error(`IntelliJ tools/list error: ${toolsResponse.error.message || "unknown"}`);
   }
 
-  cachedTools = (toolsResponse.result && toolsResponse.result.tools) ? toolsResponse.result.tools : [];
+  cachedTools = toolsResponse.result && toolsResponse.result.tools ? toolsResponse.result.tools : [];
   console.log(`[BOOT] Cached ${cachedTools.length} tools`);
 }
 
@@ -363,7 +382,7 @@ https
         sendJsonRpcResult(res, msg.id, {
           protocolVersion: MCP_VERSION_CHATGPT,
           capabilities: { tools: {}, resources: {}, prompts: {} },
-          serverInfo: { name: "chatgpt-intellij-mcp-proxy", version: "1.0.0" }
+          serverInfo: { name: "chatgpt-intellij-mcp-proxy", version: "1.0.1" }
         });
         return;
       }
